@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Create Account — MentorLink{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card" style="max-width: 580px;">
+    <div class="auth-header">
+      <div class="brand-icon" style="margin: 0 auto 0.75rem;">🤝</div>
+      <h1>Create an Account</h1>
+      <p>Join MentorLink as a Mentor or Mentee</p>
+    </div>
+
+    <form id="register-form" onsubmit="handleRegister(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="reg-name">Full Name *</label>
+          <input
+            type="text"
+            class="form-control"
+            id="reg-name"
+            name="name"
+            required
+            placeholder="e.g. Jordan Lee"
+          >
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Email Address *</label>
+          <input
+            type="email"
+            class="form-control"
+            id="reg-email"
+            name="email"
+            required
+            placeholder="jordan@mentorlink.edu"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="reg-role">I want to join as *</label>
+        <select class="form-select" id="reg-role" name="role" required>
+          <option value="mentee" selected>🎓 Student Mentee (Seeking guidance)</option>
+          <option value="mentor">🧑‍🏫 Faculty / Senior Mentor (Providing guidance)</option>
+        </select>
+        <div class="form-help">Administrator accounts are provisioned via secure internal setup.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Password *</label>
+          <input
+            type="password"
+            class="form-control"
+            id="reg-password"
+            name="password"
+            required
+            minlength="6"
+            placeholder="At least 6 characters"
+          >
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-confirm-password">Confirm Password *</label>
+          <input
+            type="password"
+            class="form-control"
+            id="reg-confirm-password"
+            name="confirm_password"
+            required
+            minlength="6"
+            placeholder="Re-enter password"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="reg-dept">Department or Field of Study</label>
+        <input
+          type="text"
+          class="form-control"
+          id="reg-dept"
+          name="department"
+          placeholder="e.g. Computer Science, Information Technology"
+        >
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="reg-skills">Skills (Comma-separated)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="reg-skills"
+            name="skills"
+            placeholder="e.g. Python, Machine Learning, Web Dev"
+          >
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reg-interests">Interests (Comma-separated)</label>
+          <input
+            type="text"
+            class="form-control"
+            id="reg-interests"
+            name="interests"
+            placeholder="e.g. AI Research, Cloud Architecture"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="reg-bio">Short Biography / Goals</label>
+        <textarea
+          class="form-control"
+          id="reg-bio"
+          name="bio"
+          rows="3"
+          placeholder="Tell prospective mentors or mentees about your background..."
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+        Create Account & Get Started
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account?
+      <a href="{{ url_for('login_page') }}" style="font-weight: 600;">Sign in here</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

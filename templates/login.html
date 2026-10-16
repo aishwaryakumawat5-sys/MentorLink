@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In — MentorLink{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-header">
+      <div class="brand-icon" style="margin: 0 auto 0.75rem;">🤝</div>
+      <h1>Welcome Back</h1>
+      <p>Sign in to your MentorLink account</p>
+    </div>
+
+    <form id="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label class="form-label" for="login-email">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="login-email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="name@mentorlink.edu"
+        >
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="login-password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="login-password"
+          name="password"
+          required
+          autocomplete="current-password"
+          placeholder="••••••••"
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+        Sign In
+      </button>
+    </form>
+
+    <!-- Quick Demo Accounts -->
+    <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px dashed var(--border); text-align: center;">
+      <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        ⚡ 1-Click Instant Demo Login
+      </div>
+      <div class="quick-login-pills">
+        <button
+          type="button"
+          class="btn btn-sm btn-secondary"
+          onclick="instantLogin('admin@mentorlink.edu', 'Admin@123')"
+        >
+          👑 Admin
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-secondary"
+          onclick="instantLogin('sarah.johnson@mentorlink.edu', 'Password@123')"
+        >
+          🧑‍🏫 Mentor (Dr. Sarah)
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-secondary"
+          onclick="instantLogin('alex.rivera@mentorlink.edu', 'Password@123')"
+        >
+          🎓 Mentee (Alex)
+        </button>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline"
+          onclick="instantLogin('taylor.kim@mentorlink.edu', 'Password@123')"
+        >
+          ⏳ Unassigned (Taylor)
+        </button>
+      </div>
+    </div>
+
+    <div class="auth-footer">
+      Don't have an account yet?
+      <a href="{{ url_for('register_page') }}" style="font-weight: 600;">Sign up as Mentor or Mentee</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

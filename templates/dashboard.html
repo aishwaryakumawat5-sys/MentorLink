@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — MentorLink{% endblock %}
+
+{% block content %}
+<div class="container" id="dashboard-root">
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="dashboard-sidebar">
+      <div class="dashboard-nav-card">
+        <div class="sidebar-user-summary">
+          <div style="display: flex; align-items: center; gap: 0.65rem; margin-bottom: 0.5rem;">
+            <div class="user-avatar-small" id="dash-user-avatar" style="width: 2.25rem; height: 2.25rem; font-size: 1rem;">U</div>
+            <div style="overflow: hidden;">
+              <div class="sidebar-user-name" id="dash-user-name">Loading...</div>
+              <div class="sidebar-user-dept" id="dash-user-dept">Department</div>
+            </div>
+          </div>
+          <span class="badge" id="dash-user-role">ROLE</span>
+        </div>
+
+        <ul class="dash-nav-list" id="dashboard-nav-items">
+          <!-- Dynamically generated according to role -->
+          <li>
+            <button class="dash-nav-item active" data-tab="overview">
+              <span>📊 Overview</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <section class="dashboard-content">
+      <!-- 1. Overview Tab -->
+      <div class="tab-pane active" id="tab-overview">
+        <div id="tab-overview-content">
+          <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+            Loading dashboard data...
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Admin Users Directory -->
+      <div class="tab-pane" id="tab-users">
+        <div id="tab-users-content"></div>
+      </div>
+
+      <!-- 3. Admin Matching Center -->
+      <div class="tab-pane" id="tab-matching">
+        <div id="tab-matching-content"></div>
+      </div>
+
+      <!-- 4. Mentor Mentees View -->
+      <div class="tab-pane" id="tab-mentees">
+        <div id="tab-mentees-content"></div>
+      </div>
+
+      <!-- 5. Mentee Mentor View -->
+      <div class="tab-pane" id="tab-mentor">
+        <div id="tab-mentor-content"></div>
+      </div>
+
+      <!-- 6. Meetings Tab -->
+      <div class="tab-pane" id="tab-meetings">
+        <div id="tab-meetings-content"></div>
+      </div>
+
+      <!-- 7. Tasks Tab -->
+      <div class="tab-pane" id="tab-tasks">
+        <div id="tab-tasks-content"></div>
+      </div>
+
+      <!-- 8. Messages Tab -->
+      <div class="tab-pane" id="tab-messages">
+        <div id="tab-messages-content"></div>
+      </div>
+
+      <!-- 9. Feedback Tab -->
+      <div class="tab-pane" id="tab-feedback">
+        <div id="tab-feedback-content"></div>
+      </div>
+
+      <!-- 10. AI Skill-Gap Detective Tab -->
+      <div class="tab-pane" id="tab-skills">
+        <div id="tab-skills-content"></div>
+      </div>
+
+      <!-- 11. Adaptive Mentoring Roadmap Tab -->
+      <div class="tab-pane" id="tab-roadmap">
+        <div id="tab-roadmap-content"></div>
+      </div>
+
+      <!-- 12. Early Support Signal Engine Tab -->
+      <div class="tab-pane" id="tab-signals">
+        <div id="tab-signals-content"></div>
+      </div>
+
+      <!-- 13. Mentoring Impact Analyzer Tab -->
+      <div class="tab-pane" id="tab-impact">
+        <div id="tab-impact-content"></div>
+      </div>
+
+      <!-- 14. Profile Tab -->
+      <div class="tab-pane" id="tab-profile">
+        <div id="tab-profile-content"></div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock %}

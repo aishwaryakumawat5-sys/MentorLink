@@ -1,0 +1,463 @@
+{% extends "base.html" %}
+
+{% block title %}MentorLink — Complete Mentorship Web Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Split Interactive Showcase -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-split-grid">
+      <!-- Left Hero Column -->
+      <div>
+        <div class="hero-pill">
+          <span class="pulse-dot"></span>
+          <span>Next-Gen Academic & Career Mentorship • 2026 Batch Active</span>
+        </div>
+        <h1 class="hero-title">
+          Connect with Mentors.<br>
+          <span class="gradient-text">Accelerate Your Future.</span>
+        </h1>
+        <p class="hero-subtitle">
+          MentorLink bridges the gap between experienced university faculty and driven students. Schedule 1-on-1 sessions, track task roadmaps, exchange real-time messages, and unlock your true potential.
+        </p>
+
+        <div class="hero-actions">
+          {% if current_user %}
+            <a href="{{ url_for('dashboard_page') }}" class="btn btn-primary btn-lg" style="box-shadow: 0 4px 18px rgba(79, 70, 229, 0.45);">
+              🚀 Go to {{ current_user.role | capitalize }} Dashboard ({{ current_user.name }}) &rarr;
+            </a>
+          {% else %}
+            <a href="{{ url_for('register_page') }}" class="btn btn-primary btn-lg">
+              ✨ Join MentorLink Free
+            </a>
+            <a href="{{ url_for('login_page') }}" class="btn btn-secondary btn-lg">
+              Sign In to Account
+            </a>
+          {% endif %}
+        </div>
+
+        <!-- 1-Click Instant Demo Login Bar -->
+        <div style="background: rgba(255, 255, 255, 0.85); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1.15rem; box-shadow: var(--shadow-sm); max-width: 540px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.65rem;">
+            <span style="font-size: 0.8rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.05em;">
+              ⚡ 1-Click Instant Demo Access
+            </span>
+            <span style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">No password typing needed</span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-sm btn-secondary" onclick="instantLogin('admin@mentorlink.edu', 'Admin@123')" title="Sign in as Administrator">
+              👑 Admin
+            </button>
+            <button class="btn btn-sm btn-secondary" onclick="instantLogin('sarah.johnson@mentorlink.edu', 'Password@123')" title="Sign in as Faculty Mentor">
+              🧑‍🏫 Mentor (Dr. Sarah)
+            </button>
+            <button class="btn btn-sm btn-secondary" onclick="instantLogin('alex.rivera@mentorlink.edu', 'Password@123')" title="Sign in as Student Mentee">
+              🎓 Mentee (Alex)
+            </button>
+            <button class="btn btn-sm btn-outline" onclick="instantLogin('taylor.kim@mentorlink.edu', 'Password@123')" title="Sign in as Unassigned Mentee">
+              ⏳ Unassigned (Taylor)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Hero Column: Live Product Showcase Mockup -->
+      <div>
+        <div class="hero-mockup-card">
+          <div class="mockup-header">
+            <div style="display: flex; align-items: center; gap: 0.65rem;">
+              <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);">
+                S
+              </div>
+              <div>
+                <div style="font-weight: 800; font-size: 1rem; color: var(--text-main);">Dr. Sarah Johnson</div>
+                <div style="font-size: 0.775rem; color: var(--primary); font-weight: 700;">Computer Science &bull; 12 Yrs Experience</div>
+              </div>
+            </div>
+            <span class="badge badge-scheduled" style="font-size: 0.75rem;">
+              <span class="pulse-dot"></span> Online Today
+            </span>
+          </div>
+
+          <!-- Live Meeting Card Widget -->
+          <div class="mockup-widget" style="border-left: 4px solid var(--primary);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+              <span style="font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted);">Upcoming Session</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary);">Today at 2:00 PM</span>
+            </div>
+            <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main); margin-bottom: 0.35rem;">Sprint 1 Architecture Review & API Design</div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.8rem; color: var(--text-muted);">Mode: <strong>Google Meet</strong></span>
+              <span class="badge badge-scheduled" style="cursor: pointer;" onclick="goToFeature('meetings')">Join Room ↗</span>
+            </div>
+          </div>
+
+          <!-- Task Roadmap Widget -->
+          <div class="mockup-widget" style="margin-bottom: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-main);">📋 Mentorship Milestone</span>
+              <span style="font-size: 0.8rem; font-weight: 800; color: var(--primary);">67% Completed</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width: 67%;"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="color: var(--success); font-weight: bold;">✓</span>
+                <span style="text-decoration: line-through;">High-Fidelity Database Schema</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <span style="color: var(--primary); font-weight: bold;">•</span>
+                <strong>Implement User Authentication Flow (In Progress)</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Chat Bubble Snippet -->
+          <div style="background: rgba(224, 231, 255, 0.45); border: 1px solid #c7d2fe; border-radius: var(--radius-md); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.75rem;">
+            <span style="font-size: 1.25rem;">💬</span>
+            <div style="flex: 1; font-size: 0.825rem; color: var(--text-main);">
+              <strong>Dr. Sarah:</strong> "Great work Alex! Your PR has been merged. Let's review the API next."
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Stats Strip -->
+    <div class="stats-strip">
+      <div class="stats-strip-item">
+        <strong>500+</strong>
+        <span>Active Mentorship Pairs</span>
+      </div>
+      <div class="stats-strip-item">
+        <strong>98%</strong>
+        <span>Session Attendance Rate</span>
+      </div>
+      <div class="stats-strip-item">
+        <strong>4.9 ★</strong>
+        <span>Average Student Rating</span>
+      </div>
+      <div class="stats-strip-item">
+        <strong>15+</strong>
+        <span>Academic Departments</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4-Step "How MentorLink Works" Journey -->
+<section style="padding: 4rem 0; background: rgba(255, 255, 255, 0.6); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">How MentorLink Works</h2>
+      <p class="section-subtitle">A structured 4-step framework designed to deliver tangible growth and academic excellence.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+      <div class="step-card">
+        <div class="step-number">01</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">Profile & Goals</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Students register with their department, programming skills, and career aspirations to create a comprehensive mentee profile.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">02</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">Smart Matching</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Administrators assign mentors with an automatic limit of 5 students per faculty member, ensuring focused, personal attention.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">03</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">Sessions & Roadmaps</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Schedule Google Meet sessions or campus meetings. Mentors assign weekly milestone tasks with clear deadlines.
+        </p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">04</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.4rem;">Feedback & Mastery</h3>
+        <p style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5;">
+          Track task completions, exchange instant messages, and submit 1–5 star reviews to celebrate mentorship milestones.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Faculty Mentors Showcase -->
+<section style="padding: 4.5rem 0;">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Meet Experienced Faculty Mentors</h2>
+      <p class="section-subtitle">Distinguished professors and industry specialists guiding students across tech, design, and engineering.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+      <!-- Mentor 1 -->
+      <div class="mentor-showcase-card">
+        <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem;">
+          <div style="width: 3.5rem; height: 3.5rem; border-radius: var(--radius-md); background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.35rem;">
+            SJ
+          </div>
+          <div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Dr. Sarah Johnson</h4>
+            <div style="font-size: 0.8rem; color: var(--primary); font-weight: 700;">Computer Science Department</div>
+            <div style="color: #f59e0b; font-size: 0.85rem; font-weight: bold;">★ 5.0 (24 reviews)</div>
+          </div>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+          Associate Professor of CS with 12+ years of experience mentoring students into top software engineering roles.
+        </p>
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+          <span class="badge" style="background: var(--bg-subtle);">Python</span>
+          <span class="badge" style="background: var(--bg-subtle);">Machine Learning</span>
+          <span class="badge" style="background: var(--bg-subtle);">Web Dev</span>
+        </div>
+        <button class="btn btn-sm btn-primary" style="width: 100%;" onclick="instantLogin('sarah.johnson@mentorlink.edu', 'Password@123')">
+          Sign In as Dr. Sarah &rarr;
+        </button>
+      </div>
+
+      <!-- Mentor 2 -->
+      <div class="mentor-showcase-card">
+        <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem;">
+          <div style="width: 3.5rem; height: 3.5rem; border-radius: var(--radius-md); background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.35rem;">
+            DC
+          </div>
+          <div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Prof. David Chen</h4>
+            <div style="font-size: 0.8rem; color: var(--primary); font-weight: 700;">Software Engineering Department</div>
+            <div style="color: #f59e0b; font-size: 0.85rem; font-weight: bold;">★ 4.9 (18 reviews)</div>
+          </div>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+          Staff Cloud Architect and adjunct faculty specializing in Kubernetes, distributed microservices, and DevOps pipelines.
+        </p>
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+          <span class="badge" style="background: var(--bg-subtle);">Cloud Computing</span>
+          <span class="badge" style="background: var(--bg-subtle);">DevOps</span>
+          <span class="badge" style="background: var(--bg-subtle);">Go</span>
+        </div>
+        <button class="btn btn-sm btn-primary" style="width: 100%;" onclick="instantLogin('david.chen@mentorlink.edu', 'Password@123')">
+          Sign In as Prof. David &rarr;
+        </button>
+      </div>
+
+      <!-- Mentor 3 -->
+      <div class="mentor-showcase-card">
+        <div style="display: flex; align-items: center; gap: 0.85rem; margin-bottom: 1rem;">
+          <div style="width: 3.5rem; height: 3.5rem; border-radius: var(--radius-md); background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.35rem;">
+            ER
+          </div>
+          <div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--text-main);">Elena Rostova</h4>
+            <div style="font-size: 0.8rem; color: var(--primary); font-weight: 700;">Product & UX Design Department</div>
+            <div style="color: #f59e0b; font-size: 0.85rem; font-weight: bold;">★ 5.0 (29 reviews)</div>
+          </div>
+        </div>
+        <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5;">
+          Senior Product Designer passionate about helping early-career designers create stellar portfolios and accessible systems.
+        </p>
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+          <span class="badge" style="background: var(--bg-subtle);">UI/UX Design</span>
+          <span class="badge" style="background: var(--bg-subtle);">Figma</span>
+          <span class="badge" style="background: var(--bg-subtle);">User Research</span>
+        </div>
+        <button class="btn btn-sm btn-primary" style="width: 100%;" onclick="instantLogin('elena.rostova@mentorlink.edu', 'Password@123')">
+          Sign In as Elena &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 Unique AI-Powered Features Section -->
+<section style="padding: 4.5rem 0; background: linear-gradient(180deg, #f8fafc 0%, #edf2f7 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 3rem auto;">
+      <div class="hero-pill" style="margin-bottom: 0.75rem;">
+        <span class="pulse-dot"></span>
+        <span style="font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em;">Intelligent Mentorship Engine</span>
+      </div>
+      <h2 class="section-title" style="font-size: 2.25rem; font-weight: 900; margin-bottom: 0.75rem;">
+        5 Unique Features Powering Your Growth
+      </h2>
+      <p class="section-subtitle" style="font-size: 1.05rem; color: var(--text-muted);">
+        Advanced academic intelligence built directly into the MentorLink platform to personalize, adapt, and elevate every mentorship journey.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.75rem;">
+      <!-- Feature 1 -->
+      <div class="feature-card" onclick="goToFeature('skills')" style="cursor: pointer; background: white; border-top: 4px solid #4f46e5;" title="Click to view Skill Detective in Dashboard">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div class="feature-icon-wrapper" style="background: rgba(79, 70, 229, 0.1); color: #4f46e5;">🔍</div>
+          <span class="badge badge-primary" style="font-size: 0.75rem;">Feature 01</span>
+        </div>
+        <h3 class="feature-title" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">
+          1. AI Skill-Gap Detective
+        </h3>
+        <p class="feature-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          Identifies students’ weak skills and recommends targeted learning activities based on their assessment results.
+        </p>
+        <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+          <span>🎯 Real-time Skill Analysis</span>
+          <span style="color: var(--primary); font-weight: 700;">Explore &rarr;</span>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-card" onclick="goToFeature('roadmap')" style="cursor: pointer; background: white; border-top: 4px solid #06b6d4;" title="Click to view Adaptive Roadmap in Dashboard">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div class="feature-icon-wrapper" style="background: rgba(6, 182, 212, 0.1); color: #0891b2;">🗺️</div>
+          <span class="badge badge-info" style="font-size: 0.75rem;">Feature 02</span>
+        </div>
+        <h3 class="feature-title" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">
+          2. Adaptive Mentoring Roadmap
+        </h3>
+        <p class="feature-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          Creates personalized learning plans and adjusts weekly goals according to students’ progress and completed tasks.
+        </p>
+        <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+          <span>📈 Dynamic Weekly Milestones</span>
+          <span style="color: var(--primary); font-weight: 700;">Explore &rarr;</span>
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-card" onclick="goToFeature('signals')" style="cursor: pointer; background: white; border-top: 4px solid #ef4444;" title="Click to view Early Support Signals in Dashboard">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div class="feature-icon-wrapper" style="background: rgba(239, 68, 68, 0.1); color: #dc2626;">🚨</div>
+          <span class="badge badge-danger" style="font-size: 0.75rem;">Feature 03</span>
+        </div>
+        <h3 class="feature-title" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">
+          3. Early Support Signal Engine
+        </h3>
+        <p class="feature-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          Detects declining academic performance, missed assignments, and other patterns to alert mentors when students may need additional support.
+        </p>
+        <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+          <span>⚡ Proactive Mentor Alerting</span>
+          <span style="color: var(--primary); font-weight: 700;">Explore &rarr;</span>
+        </div>
+      </div>
+
+      <!-- Feature 4 -->
+      <div class="feature-card" onclick="goToFeature('matching')" style="cursor: pointer; background: white; border-top: 4px solid #10b981;" title="Click to view Explainable Matching in Dashboard">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div class="feature-icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: #059669;">🤝</div>
+          <span class="badge badge-success" style="font-size: 0.75rem;">Feature 04</span>
+        </div>
+        <h3 class="feature-title" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">
+          4. Explainable Mentor–Mentee Matching
+        </h3>
+        <p class="feature-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          Recommends suitable mentors based on students’ interests, career goals, required skills, mentor expertise, and availability.
+        </p>
+        <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+          <span>💡 100% Transparent Match Scores</span>
+          <span style="color: var(--primary); font-weight: 700;">Explore &rarr;</span>
+        </div>
+      </div>
+
+      <!-- Feature 5 -->
+      <div class="feature-card" onclick="goToFeature('impact')" style="cursor: pointer; background: white; border-top: 4px solid #f59e0b;" title="Click to view Impact Analytics in Dashboard">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+          <div class="feature-icon-wrapper" style="background: rgba(245, 158, 11, 0.1); color: #d97706;">📊</div>
+          <span class="badge badge-warning" style="font-size: 0.75rem;">Feature 05</span>
+        </div>
+        <h3 class="feature-title" style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.5rem;">
+          5. Mentoring Impact Analyzer
+        </h3>
+        <p class="feature-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          Tracks students’ progress before and after mentoring sessions to evaluate improvements in academic performance, skills, and goal completion.
+        </p>
+        <div style="background: var(--bg-subtle); padding: 0.75rem; border-radius: var(--radius-sm); font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between;">
+          <span>📈 Before vs After Metrics</span>
+          <span style="color: var(--primary); font-weight: 700;">Explore &rarr;</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section (Interactive Cards) -->
+<section class="features-section" style="background: rgba(255, 255, 255, 0.7); border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Everything Built for High-Impact Mentorship</h2>
+      <p class="section-subtitle">Click any feature to jump directly into the live working system.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card" onclick="goToFeature('matching')" style="cursor: pointer;" title="Open in Dashboard">
+        <div class="feature-icon-wrapper">🤝</div>
+        <h3 class="feature-title">Smart Matching & Capacity Control</h3>
+        <p class="feature-desc">Administrators pair mentors with mentees based on department and skills, enforcing a configurable limit of 5 mentees per mentor to ensure high-touch guidance.</p>
+        <div style="margin-top: 1rem; color: var(--primary); font-weight: 700; font-size: 0.875rem;">⚡ Open in Dashboard &rarr;</div>
+      </div>
+
+      <div class="feature-card" onclick="goToFeature('meetings')" style="cursor: pointer;" title="Open in Dashboard">
+        <div class="feature-icon-wrapper">📅</div>
+        <h3 class="feature-title">Structured Meeting Management</h3>
+        <p class="feature-desc">Mentees can request sessions and mentors can schedule, confirm, or complete meetings with support for online video URLs or in-person campus locations.</p>
+        <div style="margin-top: 1rem; color: var(--primary); font-weight: 700; font-size: 0.875rem;">⚡ Open in Dashboard &rarr;</div>
+      </div>
+
+      <div class="feature-card" onclick="goToFeature('tasks')" style="cursor: pointer;" title="Open in Dashboard">
+        <div class="feature-icon-wrapper">📋</div>
+        <h3 class="feature-title">Milestone & Task Tracking</h3>
+        <p class="feature-desc">Mentors assign action items with clear objectives and deadlines. Mentees update their progress in real-time from Pending to Completed.</p>
+        <div style="margin-top: 1rem; color: var(--primary); font-weight: 700; font-size: 0.875rem;">⚡ Open in Dashboard &rarr;</div>
+      </div>
+
+      <div class="feature-card" onclick="goToFeature('messages')" style="cursor: pointer;" title="Open in Dashboard">
+        <div class="feature-icon-wrapper">💬</div>
+        <h3 class="feature-title">Database-Backed Messaging</h3>
+        <p class="feature-desc">Private, authenticated conversation threads between matched mentor-mentee pairs with unread indicators and instant in-app notifications.</p>
+        <div style="margin-top: 1rem; color: var(--primary); font-weight: 700; font-size: 0.875rem;">⚡ Open in Dashboard &rarr;</div>
+      </div>
+
+      <div class="feature-card" onclick="goToFeature('feedback')" style="cursor: pointer;" title="Open in Dashboard">
+        <div class="feature-icon-wrapper">⭐</div>
+        <h3 class="feature-title">Transparent Ratings & Feedback</h3>
+        <p class="feature-desc">Mentors and mentees can submit 1 to 5-star ratings with constructive reviews to foster growth and measure mentorship success.</p>
+        <div style="margin-top: 1rem; color: var(--primary); font-weight: 700; font-size: 0.875rem;">⚡ Open in Dashboard &rarr;</div>
+      </div>
+
+      <div class="feature-card" onclick="goToFeature('profile')" style="cursor: pointer;" title="Open in Dashboard">
+        <div class="feature-icon-wrapper">🛡️</div>
+        <h3 class="feature-title">Security & Role Isolation</h3>
+        <p class="feature-desc">Engineered with Werkzeug password hashing, session tokens, CSRF protection, and strict server-side permission checks across all API endpoints.</p>
+        <div style="margin-top: 1rem; color: var(--primary); font-weight: 700; font-size: 0.875rem;">⚡ Open in Dashboard &rarr;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Banner -->
+<section style="padding: 5rem 0; background: var(--hero-gradient); color: white; text-align: center;">
+  <div class="container">
+    <h2 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 1rem; letter-spacing: -0.02em;">
+      Ready to Start Your Mentorship Journey?
+    </h2>
+    <p style="font-size: 1.15rem; color: #e0e7ff; max-width: 620px; margin: 0 auto 2.5rem; line-height: 1.6;">
+      Join hundreds of students and faculty professors building meaningful academic relationships on MentorLink today.
+    </p>
+    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a href="{{ url_for('register_page') }}" class="btn btn-primary btn-lg" style="background: white; color: var(--primary); font-weight: 800;">
+        Create Free Account
+      </a>
+      <button class="btn btn-secondary btn-lg" style="background: rgba(255, 255, 255, 0.15); color: white; border-color: rgba(255, 255, 255, 0.3);" onclick="instantLogin('alex.rivera@mentorlink.edu', 'Password@123')">
+        Test as Student Mentee &rarr;
+      </button>
+    </div>
+  </div>
+</section>
+{% endblock %}
