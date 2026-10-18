@@ -48,11 +48,97 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Initialize Theme from localStorage or system preference
+  initTheme();
+
+  // Start Live Activity Social-Proof Toasts (Runs subtly on landing page)
+  if (!document.getElementById("dashboard-root")) {
+    startLiveActivityTicker();
+  }
+
   // Check if we are on dashboard page
   if (document.getElementById("dashboard-root")) {
     initDashboard();
   }
 });
+
+// ==========================================
+// Dark / Light Theme Manager
+// ==========================================
+function initTheme() {
+  const savedTheme = localStorage.getItem("mentorlink-theme") || "light";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+  updateThemeIcon(savedTheme);
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute("data-theme") || "light";
+  const newTheme = current === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("mentorlink-theme", newTheme);
+  updateThemeIcon(newTheme);
+  showToast("Theme Updated", `Switched to ${newTheme === "dark" ? "Dark" : "Light"} mode`, "info", 1500);
+}
+
+function updateThemeIcon(theme) {
+  const icons = [document.getElementById("theme-icon"), document.getElementById("theme-icon-auth")];
+  icons.forEach((icon) => {
+    if (icon) {
+      icon.innerText = theme === "dark" ? "☀️" : "🌙";
+    }
+  });
+}
+
+// ==========================================
+// Live Activity Social Proof Simulation
+// ==========================================
+function startLiveActivityTicker() {
+  const activities = [
+    { title: "Task Completed", desc: "Alex R. completed 'Implement Authentication Flow'", icon: "✅" },
+    { title: "Session Scheduled", desc: "Dr. Sarah Johnson scheduled a meeting with Maya P.", icon: "📅" },
+    { title: "AI Diagnostic", desc: "Taylor K. identified Python data structures skill gap", icon: "🔍" },
+    { title: "New Match Made", desc: "Prof. David Chen matched with a Software Engineering student", icon: "🤝" },
+    { title: "Milestone Achieved", desc: "Jordan Lee completed Sprint 1 UX Review", icon: "⭐" },
+  ];
+
+  let index = 0;
+  setTimeout(() => {
+    showLiveActivity(activities[0]);
+    setInterval(() => {
+      index = (index + 1) % activities.length;
+      showLiveActivity(activities[index]);
+    }, 18000); // Trigger every 18 seconds
+  }, 4000);
+}
+
+function showLiveActivity(activity) {
+  const existing = document.querySelector(".live-activity-toast");
+  if (existing) existing.remove();
+
+  const toast = document.createElement("div");
+  toast.className = "live-activity-toast";
+  toast.innerHTML = `
+    <div style="font-size: 1.35rem;">${activity.icon}</div>
+    <div style="flex: 1;">
+      <div style="font-size: 0.75rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.04em;">
+        Live Mentorship Activity
+      </div>
+      <div style="font-size: 0.825rem; font-weight: 600; color: var(--text-main); margin-top: 2px;">
+        ${escapeHtml(activity.desc)}
+      </div>
+    </div>
+    <button onclick="this.parentElement.remove()" style="background: none; border: none; font-size: 1rem; color: var(--text-muted); cursor: pointer;">&times;</button>
+  `;
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    if (toast.parentNode) {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateY(20px)";
+      setTimeout(() => toast.remove(), 400);
+    }
+  }, 6500);
+}
 
 /**
  * Navigate to relevant dashboard tab based on feature card and user role

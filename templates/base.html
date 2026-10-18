@@ -54,11 +54,21 @@
 
             <button class="btn btn-sm btn-secondary" onclick="handleLogout()">Sign Out</button>
           {% else %}
+            <!-- Dark/Light Theme Switcher -->
+            <button class="theme-toggle-btn" id="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+              <span id="theme-icon">🌙</span>
+            </button>
             <ul class="nav-links">
               <li><a href="{{ url_for('index') }}" class="nav-link">Home</a></li>
               <li><a href="{{ url_for('login_page') }}" class="btn btn-secondary btn-sm">Sign In</a></li>
               <li><a href="{{ url_for('register_page') }}" class="btn btn-primary btn-sm">Get Started</a></li>
             </ul>
+          {% endif %}
+          {% if current_user %}
+            <!-- Dark/Light Theme Switcher for Logged In User -->
+            <button class="theme-toggle-btn" id="theme-toggle-btn-auth" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Theme" style="margin-left: 0.35rem;">
+              <span id="theme-icon-auth">🌙</span>
+            </button>
           {% endif %}
         </div>
       </nav>

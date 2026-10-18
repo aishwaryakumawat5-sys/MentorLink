@@ -61,9 +61,21 @@
         </div>
       </div>
 
-      <!-- Right Hero Column: Live Product Showcase Mockup -->
-      <div>
-        <div class="hero-mockup-card">
+      <!-- Right Hero Column: Live Product Showcase Mockup with Floating Badges -->
+      <div style="position: relative;">
+        <!-- Floating Pill 1: AI Match Score -->
+        <div class="floating-pill" style="position: absolute; top: -18px; left: -20px; z-index: 10; background: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-lg); padding: 0.5rem 0.85rem; border-radius: var(--radius-full); display: flex; align-items: center; gap: 0.5rem; font-size: 0.825rem; font-weight: 700;">
+          <span style="background: linear-gradient(135deg, #10b981, #059669); color: white; border-radius: 50%; width: 1.5rem; height: 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 0.75rem;">✓</span>
+          <span>98% Match Accuracy</span>
+        </div>
+
+        <!-- Floating Pill 2: Live AI Signal -->
+        <div class="floating-pill-delay" style="position: absolute; bottom: -18px; right: -15px; z-index: 10; background: var(--bg-surface); border: 1px solid var(--border); box-shadow: var(--shadow-lg); padding: 0.5rem 0.85rem; border-radius: var(--radius-full); display: flex; align-items: center; gap: 0.5rem; font-size: 0.825rem; font-weight: 700;">
+          <span class="pulse-dot"></span>
+          <span>⚡ Adaptive Roadmap Active</span>
+        </div>
+
+        <div class="hero-mockup-card" style="box-shadow: var(--shadow-xl); border: 1px solid rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px);">
           <div class="mockup-header">
             <div style="display: flex; align-items: center; gap: 0.65rem;">
               <div style="width: 2.75rem; height: 2.75rem; border-radius: 50%; background: var(--primary-gradient); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);">
